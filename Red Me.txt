@@ -1,0 +1,4 @@
+Pour suprrimer la base de donnees
+dotnet ef database drop -p Infrastructure -s API
+Supprimer la migration
+donet ef migrations remove -p Infrastructure -s API

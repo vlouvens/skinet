@@ -9,9 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductsController : ControllerBase
+    public class ProductsController : BaseApiController
     {
         private readonly IGenericRepository<Products> _productRepo;
         private readonly IGenericRepository<ProductBrand> _brandRepo;
@@ -30,9 +28,9 @@ namespace API.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>>  GetProducts()
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>>  GetProducts(string sort)
         {
-            var spec = new ProductWithTypesAndBrandsSpecification();
+            var spec = new ProductWithTypesAndBrandsSpecification(sort);
             var products = await _productRepo.ListAsync(spec);
             // return products.Select(product => new ProductToReturnDto
             // {

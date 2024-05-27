@@ -8,8 +8,9 @@ namespace Core.Specifications
 {
     public interface ISpecification<T>
     {
-        Expression<Func<T,bool>> criteria{get;}
+        Expression<Func<T,bool>> Criteria{get;}
         List<Expression<Func<T,Object>>> Inculde{get;}
-        
+        Expression<Func<T, Object>> OrderBy {get;}
+        Expression<Func<T, Object>> OrderByDescending {get;}
     }
 }

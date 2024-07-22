@@ -28,3 +28,16 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: SonarCloudPrepare@2
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'skinet-organization'
+    scannerMode: 'MSBuild'
+    projectKey: 'skinet-organization_skinet'
+    projectName: 'Skinet'
+- task: SonarCloudAnalyze@2
+  inputs:
+    jdkversion: 'JAVA_HOME_17_X64'
+- task: SonarCloudPublish@2
+  inputs:
+    pollingTimeoutSec: '300'

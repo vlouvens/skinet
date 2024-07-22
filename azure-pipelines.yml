@@ -31,9 +31,9 @@ steps:
 - task: SonarCloudPrepare@2
   inputs:
     SonarCloud: 'SonarCloud'
-    organization: 'skinet-organization'
+    organization: 'skinet'
     scannerMode: 'MSBuild'
-    projectKey: 'Skinet'
+    projectKey: 'skinet_agileproject'
     projectName: 'Skinet'
 - task: SonarCloudAnalyze@2
   inputs:

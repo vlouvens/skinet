@@ -20,12 +20,13 @@ steps:
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
+
 - task: SonarCloudPrepare@2
   inputs:
-    SonarCloud: 'SonarCloud Connection'
-    organization: 'skinet'
+    SonarCloud: 'SonardCloud'
+    organization: 'dev-o'
     scannerMode: 'MSBuild'
-    projectKey: 'skinet_agileproject'
+    projectKey: 'Skinet'
     projectName: 'Skinet'
 
 - task: VSBuild@1
@@ -34,7 +35,6 @@ steps:
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-
 
 - task: SonarCloudAnalyze@2
 - task: SonarCloudPublish@2

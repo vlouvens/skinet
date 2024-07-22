@@ -20,6 +20,13 @@ steps:
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
+- task: SonarCloudPrepare@2
+  inputs:
+    SonarCloud: 'SonarCloud Connection'
+    organization: 'skinet'
+    scannerMode: 'MSBuild'
+    projectKey: 'skinet_agileproject'
+    projectName: 'Skinet'
 
 - task: VSBuild@1
   inputs:
@@ -28,16 +35,8 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: SonarCloudPrepare@2
-  inputs:
-    SonarCloud: 'SonarCloud'
-    organization: 'skinet'
-    scannerMode: 'MSBuild'
-    projectKey: 'skinet_agileproject'
-    projectName: 'Skinet'
+
 - task: SonarCloudAnalyze@2
-  inputs:
-    jdkversion: 'JAVA_HOME_17_X64'
 - task: SonarCloudPublish@2
   inputs:
     pollingTimeoutSec: '300'

@@ -1,4 +1,4 @@
-# ASP.NET Core (.NET Framework)
+ # ASP.NET Core (.NET Framework)
 # Build and test ASP.NET Core projects targeting the full .NET Framework.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
@@ -32,4 +32,9 @@ steps:
   inputs:
     command: publish
     publishWebProjects: true
-    arguments: '--configuration $(buildConfiguration) --output $(Build.Artifact)'
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'Skinet-Artifact'
